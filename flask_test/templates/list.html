@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{{ doc_type + "s"}}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <form action="/{{ doc_type }}" method="post" class="form-inline">
+        <input type="text" name="title" class="form-control my-1 mr-sm-2" placeholder="{{ doc_type }}">
+        <button type="submit" class="btn btn-primary my-1">Create</button>
+    </form>
+    <p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Title</td>
+                    <td align="right">Delete</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in items %}
+                <tr>
+                    <td>{{ i.get("id") }}</td>
+                    <td><a href="/{{ doc_type }}/{{ i.get('id') }}">{{ i.get('title') }}</a></td>
+                    <td><a href="/{{ doc_type }}/{{ i.get('id') }}/delete" class="float-right"><b>x</b></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </p>
+{% endblock %}
