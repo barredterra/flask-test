@@ -3,29 +3,12 @@
 {% block header %}
   <h1>
     {% block title %}{{ doc_type }}{% endblock %}
-    <div class="float-right">
-      <a href="/{{ doc_type }}/{{ doc.id }}/delete" class="btn btn-secondary float-right my-1">Delete</a>
-      {% if doc_type == "Product" %}
-        <form action="/{{ doc_type }}/{{ doc.id }}/move" method="post" class="form-inline float-right">
-          <select name="destination" class="form-control my-1 mr-sm-2">
-              <option value="0" aria-selected="true">Move to...</option>
-              {% for location in locations %}
-                  <option value="{{ location.id }}">{{ location.title }}</option>
-              {% endfor %}
-          </select>
-          <button type="submit" class="btn btn-light my-1 mr-sm-2">Move</button>
-        </form>
-      {% endif %}
-    </div>
+    <a href="/{{ doc_type }}/{{ doc['id'] }}/delete" class="btn btn-secondary float-right my-1">Delete</a>
   </h1>
 {% endblock %}
 
 {% block content %}
-  {% for key, value in doc.items() %}
-    {% if key == "location" %}
-      <p>{{ key | title }}:  <a href="/Location/{{ value.id }}">{{ value.title }}</a></p>
-    {% else %}
-      <p>{{ key | title }}: {{ value }}</p>
-    {% endif %}
+  {% for key in doc.keys() %}
+      <p>{{ key | title }}: {{ doc[key] }}</p>
   {% endfor %}
 {% endblock %}

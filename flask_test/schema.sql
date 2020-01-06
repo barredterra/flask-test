@@ -9,9 +9,7 @@ CREATE TABLE Location (
 
 CREATE TABLE Product (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title,
-    "location" INTEGER,
-    FOREIGN KEY ("location") REFERENCES Location(id)
+    title
 );
 
 CREATE TABLE ProductMovement (

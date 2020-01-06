@@ -10,23 +10,29 @@
         <button type="submit" class="btn btn-primary my-1">Create</button>
     </form>
     <p>
+        {% if items %}
         <table class="table">
             <thead>
                 <tr>
                     <td>ID</td>
-                    <td>Title</td>
+                    {% for key in items[0].keys() if key != "id" %}
+                        <td>{{ key | title }}</td>
+                    {% endfor %}
                     <td align="right">Delete</td>
                 </tr>
             </thead>
             <tbody>
                 {% for i in items %}
                 <tr>
-                    <td>{{ i.get("id") }}</td>
-                    <td><a href="/{{ doc_type }}/{{ i.get('id') }}">{{ i.get('title') }}</a></td>
-                    <td><a href="/{{ doc_type }}/{{ i.get('id') }}/delete" class="float-right"><b>x</b></a></td>
+                    <td><a href="/{{ doc_type }}/{{ i['id'] }}">{{ i['id'] }}</a></td>
+                    {% for key in i.keys() if key != "id" %}
+                        <td>{{ i[key] }}</td>
+                    {% endfor %}
+                    <td><a href="/{{ doc_type }}/{{ i['id'] }}/delete" class="float-right"><b>x</b></a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+        {% endif %}
     </p>
 {% endblock %}

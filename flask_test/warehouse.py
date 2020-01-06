@@ -2,6 +2,7 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from flask_test.db import get_db
+import sqlite3
 
 bp = Blueprint('warehouse', __name__)
 
@@ -41,9 +42,9 @@ def _move(product_id, destination_id):
     doc = _get_doc('Product', product_id)
 
     source_id = None
-    source = doc.get('location')
-    if isinstance(source, dict):
-        source_id = source.get('id')
+    source = doc['location']
+    if isinstance(source, sqlite3.Row):
+        source_id = source['id']
 
     db = get_db()
     db.execute('INSERT INTO ProductMovement VALUES (?, ?, ?, ?, ?, ?)', (None, None, source_id, destination_id, product_id, 0))
@@ -58,12 +59,7 @@ def _get_list(doc_type):
 def _get_doc(doc_type, doc_id):
     db = get_db()
     results = db.execute('SELECT * FROM %s WHERE id = %d' % (doc_type, doc_id))
-    doc = results.fetchone()
-    
-    if doc and doc.get('location'):
-        doc['location'] = _get_doc("Location", int(doc.get('location')))
-
-    return doc
+    return results.fetchone()
 
 def _insert_doc(doc_type, title):
     db = get_db()
