@@ -3,7 +3,7 @@
 {% block header %}
   <h1>
     {% block title %}{{ doc_type }}{% endblock %}
-    <a href="/{{ doc_type }}/{{ doc['id'] }}/delete" class="btn btn-secondary float-right my-1">Delete</a>
+    <a href="{{ url_for('api.delete_doc', doc_type=doc_type, doc_id=doc['id']) }}" class="btn btn-secondary float-right my-1">Delete</a>
   </h1>
 {% endblock %}
 

@@ -1,3 +1,5 @@
 Flask
 pysqlite3
 python-dotenv
+pylint
+pydocstyle

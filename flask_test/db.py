@@ -2,6 +2,7 @@ import sqlite3
 import click
 from flask import current_app, g
 from flask.cli import with_appcontext
+from datetime import datetime
 
 
 def get_db():
@@ -44,3 +45,41 @@ def init_db_command():
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
+
+# ---------------------- own ----------------------
+
+def get_list(doc_type):
+    db = get_db()
+    doc_list = db.execute('SELECT * FROM %s' % doc_type)
+    return doc_list.fetchall()
+
+def get_doc(doc_type, doc_id):
+    db = get_db()
+    results = db.execute('SELECT * FROM %s WHERE id = %d' % (doc_type, doc_id))
+    return results.fetchone()
+
+def insert_doc(doc_type, title=None, from_location=None, to_location=None, product=None, qty=None):
+    db = get_db()
+
+    if doc_type == "ProductMovement":
+        db.execute("""
+            INSERT INTO %s (timestamp, from_location, to_location, product, qty)
+            VALUES (?, ?, ?, ?, ?)
+        """ % doc_type, [None, None, datetime.now().isoformat(), int(from_location), int(to_location), int(product), int(qty)])
+    elif title:
+        db.execute('INSERT INTO %s (title) VALUES (?)' % doc_type, [title])
+
+    db.commit()
+
+def insert_movement(to_location, product_id, qty, from_location=None):
+    db = get_db()
+    db.execute("""
+        INSERT INTO ProductMovement (timestamp, from_location, to_location, product_id, qty)
+        VALUES (?, ?, ?, ?, ?)
+    """, [datetime.now().isoformat(), from_location, to_location, product_id, qty])
+    db.commit()
+
+def delete_doc(doc_type, doc_id):
+    db = get_db()
+    db.execute('DELETE FROM %s WHERE id = %d' % (doc_type, doc_id))
+    db.commit()

@@ -1,9 +1,8 @@
 import os
 from flask import Flask
 from flask import render_template
-from flask_test import db
-from flask_test import warehouse
-
+from flask_test import db, api
+from flask_test.views import listview, single
 
 def create_app(test_config=None):
     """
@@ -36,7 +35,9 @@ def create_app(test_config=None):
         pass
 
     db.init_app(app)
-    app.register_blueprint(warehouse.bp)
+    app.register_blueprint(api.bp)
+    app.register_blueprint(listview.bp)
+    app.register_blueprint(single.bp)
 
     @app.route('/')
     def hello_world():

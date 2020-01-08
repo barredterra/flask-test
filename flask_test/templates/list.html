@@ -5,8 +5,26 @@
 {% endblock %}
 
 {% block content %}
-    <form action="/{{ doc_type }}" method="post" class="form-inline">
-        <input type="text" name="title" class="form-control my-1 mr-sm-2" placeholder="{{ doc_type }}">
+    <form action="{{ url_for('api.create_doc', doc_type=doc_type) }}" method="post" class="form-inline">
+        {% for field in fields %}
+            {% if field.get('type') == 'select' and field.get('options')%}
+                <select class="form-control custom-select my-1 mr-sm-2">
+                    <option>{{ field.get('display') }}</option>
+                    {% for option in get_options(field.get('options')) %}
+                        <option value="{{ option['id'] }}">{{ option['title'] }}</option>
+                    {% endfor %}
+                </select>
+            {% else %}
+                <label for="{{ field.get('name') }}-field" class="sr-only">{{ field.get('display') }}</label>
+                <input 
+                    type="{{ field.get('type') }}"
+                    name="{{ field.get('name') }}"
+                    id="{{ field.get('name') }}-field"
+                    placeholder="{{ field.get('display') }}"
+                    class="form-control my-1 mr-sm-2"
+                >
+            {% endif %}
+        {% endfor %}
         <button type="submit" class="btn btn-primary my-1">Create</button>
     </form>
     <p>
@@ -24,11 +42,11 @@
             <tbody>
                 {% for i in items %}
                 <tr>
-                    <td><a href="/{{ doc_type }}/{{ i['id'] }}">{{ i['id'] }}</a></td>
+                    <td><a href="{{ url_for('single.get_doc', doc_type=doc_type, doc_id=i['id']) }}">{{ i['id'] }}</a></td>
                     {% for key in i.keys() if key != "id" %}
                         <td>{{ i[key] }}</td>
                     {% endfor %}
-                    <td><a href="/{{ doc_type }}/{{ i['id'] }}/delete" class="float-right"><b>x</b></a></td>
+                    <td><a href="{{ url_for('api.delete_doc', doc_type=doc_type, doc_id=i['id']) }}" class="float-right"><b>x</b></a></td>
                 </tr>
                 {% endfor %}
             </tbody>
