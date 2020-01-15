@@ -2,7 +2,7 @@ import os
 from flask import Flask
 from flask import render_template
 from flask_test import db, api
-from flask_test.views import listview, single
+from flask_test.views import single, listview, report
 
 def create_app(test_config=None):
     """
@@ -38,6 +38,7 @@ def create_app(test_config=None):
     app.register_blueprint(api.bp)
     app.register_blueprint(listview.bp)
     app.register_blueprint(single.bp)
+    app.register_blueprint(report.bp)
 
     @app.route('/')
     def hello_world():
