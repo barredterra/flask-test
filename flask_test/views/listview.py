@@ -1,6 +1,6 @@
 from flask import (Blueprint, render_template)
-from flask_test.schema import FORM_SCHEMA
 from flask_test import db
+from flask_test.schema import FORM_SCHEMA
 
 bp = Blueprint('list', __name__)
 

@@ -8,7 +8,7 @@ FORM_SCHEMA = {
             "display": "Title"
         }
     ],
-    "Location": [
+    "Warehouse": [
         {
             "type": "text",
             "name": "title",
@@ -24,15 +24,15 @@ FORM_SCHEMA = {
         },
         {
             "type": "select",
-            "options": "Location",
-            "name": "from_location",
-            "display": "From Location"
+            "options": "Warehouse",
+            "name": "from_warehouse",
+            "display": "From Warehouse"
         },
         {
             "type": "select",
-            "options": "Location",
-            "name": "to_location",
-            "display": "To Location"
+            "options": "Warehouse",
+            "name": "to_warehouse",
+            "display": "To Warehouse"
         },
         {
             "type": "number",

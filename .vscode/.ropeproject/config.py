@@ -98,7 +98,7 @@ def set_prefs(prefs):
     # imports.
     prefs['sort_imports_alphabetically'] = False
 
-    # Location of implementation of
+    # Warehouse of implementation of
     # rope.base.oi.type_hinting.interfaces.ITypeHintingFactory In general
     # case, you don't have to change this value, unless you're an rope expert.
     # Change this value to inject you own implementations of interfaces

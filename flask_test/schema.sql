@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS Location;
+DROP TABLE IF EXISTS Warehouse;
 DROP TABLE IF EXISTS Product;
 DROP TABLE IF EXISTS ProductMovement;
 
-CREATE TABLE Location (
+CREATE TABLE Warehouse (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title
 );
@@ -15,8 +15,8 @@ CREATE TABLE Product (
 CREATE TABLE ProductMovement (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-    from_location INTEGER,
-    to_location INTEGER NOT NULL,
+    from_warehouse INTEGER,
+    to_warehouse INTEGER NOT NULL,
     product_id INTEGER NOT NULL,
     qty
 );
@@ -27,21 +27,59 @@ CREATE TABLE DocFields (
     field
 );
 
+CREATE VIEW Report AS
+WITH
+incoming AS (
+    SELECT
+        to_warehouse as warehouse,
+        product_id,
+        SUM(qty) as amount
+    FROM ProductMovement
+    WHERE to_warehouse IS NOT NULL
+    GROUP BY product_id, to_warehouse
+),
+outgoing AS (
+    SELECT
+        from_warehouse as warehouse,
+        product_id,
+        -SUM(qty) as amount
+    FROM ProductMovement
+    WHERE from_warehouse IS NOT NULL
+    GROUP BY product_id, from_warehouse
+)
+SELECT
+    Warehouse.title,
+    Product.title as product,
+    SUM(amount) as stock
+FROM (
+    SELECT warehouse, product_id, amount FROM incoming
+    UNION ALL
+    SELECT warehouse, product_id, amount FROM outgoing
+)
+LEFT JOIN Warehouse ON
+Warehouse.id = warehouse
+LEFT JOIN Product ON
+Product.id = product_id
+GROUP BY warehouse, product_id;
+
+
 INSERT INTO DocFields (doctype, field)
 VALUES
-    ("Location", "title"),
+    ("Warehouse", "title"),
     ("Product", "title"),
-    ("ProductMovement", "from_location"),
-    ("ProductMovement", "to_location"),
+    ("ProductMovement", "from_warehouse"),
+    ("ProductMovement", "to_warehouse"),
     ("ProductMovement", "product_id"),
     ("ProductMovement", "qty");
 
+INSERT INTO Warehouse (title)
+VALUES
+    ("Mumbai"),
+    ("Berlin"),
+    ("New York");
 
-CREATE VIEW Report AS
-SELECT Location.title as Location, Product.title as Product, SUM(qty) as Stock
-FROM ProductMovement
-
-LEFT JOIN Product on Product.id = ProductMovement.product_id
-LEFT JOIN Location on Location.id = ProductMovement.to_location
-
-GROUP BY to_location, product_id;
+INSERT INTO Product (title)
+VALUES
+    ("Banana"),
+    ("iPhone"),
+    ("Printer");

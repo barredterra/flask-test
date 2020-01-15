@@ -29,28 +29,30 @@
     </form>
     <p>
         {% if items %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <td>ID</td>
-                    {% for key in items[0].keys() if key != "id" %}
-                        <td>{{ key | title }}</td>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        {% for key in items[0].keys() if key != "id" %}
+                            <th>{{ " ".join(key.split("_")) | title }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in items %}
+                        <tr>
+                            {% for key in i.keys() if key != "id" %}
+                                <td>
+                                    <a href="{{ url_for('single.get_doc', doc_type=doc_type, doc_id=i['id']) }}">
+                                        {{ i[key] }}
+                                    </a>
+                                </td>
+                            {% endfor %}
+                        </tr>
                     {% endfor %}
-                    <td align="right">Delete</td>
-                </tr>
-            </thead>
-            <tbody>
-                {% for i in items %}
-                <tr>
-                    <td><a href="{{ url_for('single.get_doc', doc_type=doc_type, doc_id=i['id']) }}">{{ i['id'] }}</a></td>
-                    {% for key in i.keys() if key != "id" %}
-                        <td>{{ i[key] }}</td>
-                    {% endfor %}
-                    <td><a href="{{ url_for('api.delete_doc', doc_type=doc_type, doc_id=i['id']) }}" class="float-right"><b>x</b></a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
         {% endif %}
     </p>
 {% endblock %}

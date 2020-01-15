@@ -7,24 +7,33 @@
 {% block content %}
 {% if items %}
     <p>
-        <table class="table">
-            <thead>
-                <tr>
-                    {% for key in items[0].keys()%}
-                        <td>{{ key | title }}</td>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        {% for key in items[0].keys()%}
+                            <th>{{ key | title }}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in items %}
+                    <tr>
+                        {% for key in i.keys() %}
+                            <td>{{ i[key] }}</td>
+                        {% endfor %}
+                    </tr>
                     {% endfor %}
-                </tr>
-            </thead>
-            <tbody>
-                {% for i in items %}
-                <tr>
-                    {% for key in i.keys() %}
-                        <td>{{ i[key] }}</td>
-                    {% endfor %}
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </p>
+{% else %}
+<div class="text-center">
+    <p>Move a <strong>Product</strong> into a <strong>Warehouse</strong> to see it's current stock.</p>
+    <a href="/ProductMovement">
+        <button class="btn btn-primary">New ProductMovement</button>
+    </a>
+</div>
 {% endif %}
 {% endblock %}

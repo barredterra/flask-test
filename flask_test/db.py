@@ -49,30 +49,43 @@ def init_app(app):
 # ---------------------- own ----------------------
 
 def get_list(doc_type):
-    db = get_db()
-    doc_list = db.execute('SELECT * FROM %s' % doc_type)
-    return doc_list.fetchall()
+    return DocType(doc_type).get_list()
 
-def get_doc(doc_type, doc_id):
-    db = get_db()
-    results = db.execute('SELECT * FROM %s WHERE id = %d' % (doc_type, doc_id))
-    return results.fetchone()
+class DocType():
+    def __init__(self, doc_type):
+        self.doc_type = doc_type
+        self.db = get_db()
 
-def insert_doc(doc_type, **kwargs):
-    db = get_db()
-    fields = db.execute('SELECT field FROM DocFields WHERE doctype = ?', [doc_type]).fetchall()
-    fields_list = [f['field'] for f in fields]
+    def get_list(self):
+        doc_list = self.db.execute('SELECT * FROM %s' % self.doc_type)
+        return doc_list.fetchall()
 
-    placeholders = ",".join("?" for i in range(len(fields)))
-    fields_string = ",".join(fields_list)
+    def insert_doc(self, **kwargs):
+        fields = self.db.execute(
+            'SELECT field FROM DocFields WHERE doctype = ?',
+            [self.doc_type]
+        )
+        fields_list = [f['field'] for f in fields.fetchall()]
 
-    db.execute(
-        "INSERT INTO %s (%s)" % (doc_type, fields_string) + "VALUES (%s)" % placeholders,
-        [kwargs.get(field) for field in fields_list]
-    )
-    db.commit()
+        placeholders = ",".join("?" for i in range(len(fields_list)))
+        fields_string = ",".join(fields_list)
 
-def delete_doc(doc_type, doc_id):
-    db = get_db()
-    db.execute('DELETE FROM %s WHERE id = %d' % (doc_type, doc_id))
-    db.commit()
+        self.db.execute(
+            "INSERT INTO %s (%s)" % (self.doc_type, fields_string) + "VALUES (%s)" % placeholders,
+            [kwargs.get(field) for field in fields_list]
+        )
+        self.db.commit()
+
+
+class Document():
+    def __init__(self, doc_type):
+        self.doc_type = doc_type
+        self.db = get_db()
+
+    def get(self, doc_id):
+        results = self.db.execute('SELECT * FROM %s WHERE id = %d' % (self.doc_type, doc_id))
+        return results.fetchone()
+
+    def delete(self, doc_id):
+        self.db.execute('DELETE FROM %s WHERE id = %d' % (self.doc_type, doc_id))
+        self.db.commit()
