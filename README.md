@@ -29,6 +29,8 @@ flask run --reload
 
 ## Challenges
 
+At first I built a simplified version where you could create items and locations and move each item from one location to another. Later, I refactored this and added the ability to move quantities of a product between locations. At the very end I added the report over the quantities available in each location.
+
 I spent way too much time figuring out why the selected `<option>` in a new ProductMovement was not submitted by the browser. My form looked like this:
 
 ```html
