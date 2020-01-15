@@ -3,7 +3,7 @@ import click
 from flask import current_app, g
 from flask.cli import with_appcontext
 from datetime import datetime
-
+from flask_test.schema import FORM_SCHEMA
 
 def get_db():
     """Return a database connection."""
@@ -58,25 +58,18 @@ def get_doc(doc_type, doc_id):
     results = db.execute('SELECT * FROM %s WHERE id = %d' % (doc_type, doc_id))
     return results.fetchone()
 
-def insert_doc(doc_type, title=None, from_location=None, to_location=None, product=None, qty=None):
+def insert_doc(doc_type, **kwargs):
     db = get_db()
+    fields = db.execute('SELECT field FROM DocFields WHERE doctype = ?', [doc_type]).fetchall()
+    fields_list = [f['field'] for f in fields]
 
-    if doc_type == "ProductMovement":
-        db.execute("""
-            INSERT INTO %s (timestamp, from_location, to_location, product, qty)
-            VALUES (?, ?, ?, ?, ?)
-        """ % doc_type, [None, None, datetime.now().isoformat(), int(from_location), int(to_location), int(product), int(qty)])
-    elif title:
-        db.execute('INSERT INTO %s (title) VALUES (?)' % doc_type, [title])
+    placeholders = ",".join("?" for i in range(len(fields)))
+    fields_string = ",".join(fields_list)
 
-    db.commit()
-
-def insert_movement(to_location, product_id, qty, from_location=None):
-    db = get_db()
-    db.execute("""
-        INSERT INTO ProductMovement (timestamp, from_location, to_location, product_id, qty)
-        VALUES (?, ?, ?, ?, ?)
-    """, [datetime.now().isoformat(), from_location, to_location, product_id, qty])
+    db.execute(
+        "INSERT INTO %s (%s)" % (doc_type, fields_string) + "VALUES (%s)" % placeholders,
+        [kwargs.get(field) for field in fields_list]
+    )
     db.commit()
 
 def delete_doc(doc_type, doc_id):

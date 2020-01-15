@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Report{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+{% if items %}
+    <p>
+        <table class="table">
+            <thead>
+                <tr>
+                    {% for key in items[0].keys()%}
+                        <td>{{ key | title }}</td>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in items %}
+                <tr>
+                    {% for key in i.keys() %}
+                        <td>{{ i[key] }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </p>
+{% endif %}
+{% endblock %}

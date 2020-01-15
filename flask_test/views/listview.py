@@ -6,6 +6,13 @@ bp = Blueprint('list', __name__)
 
 @bp.route('/<doc_type>', methods=['GET'])
 def get_list(doc_type):
+    if doc_type == "Report":
+        return render_template(
+            'report.html',
+            items=db.get_list(doc_type),
+            doc_type=doc_type
+        )
+
     return render_template(
         'list.html',
         items=db.get_list(doc_type),

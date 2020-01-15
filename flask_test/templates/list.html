@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block content %}
-    <form action="{{ url_for('api.create_doc', doc_type=doc_type) }}" method="post" class="form-inline">
+    <form action="{{ url_for('api.create_doc', doc_type=doc_type) }}" method="post" class="form-inline" id="newdoc">
         {% for field in fields %}
             {% if field.get('type') == 'select' and field.get('options')%}
-                <select class="form-control custom-select my-1 mr-sm-2">
-                    <option>{{ field.get('display') }}</option>
+                <select class="form-control custom-select my-1 mr-sm-2" name="{{ field.get('name') }}">
+                    <option value="" disabled selected>{{ field.get('display') }}</option>
                     {% for option in get_options(field.get('options')) %}
                         <option value="{{ option['id'] }}">{{ option['title'] }}</option>
                     {% endfor %}

@@ -19,7 +19,7 @@ FORM_SCHEMA = {
         {
             "type": "select",
             "options": "Product",
-            "name": "product",
+            "name": "product_id",
             "display": "Product"
         },
         {
