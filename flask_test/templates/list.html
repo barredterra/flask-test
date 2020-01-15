@@ -43,7 +43,7 @@
                         <tr>
                             {% for key in i.keys() if key != "id" %}
                                 <td>
-                                    <a href="{{ url_for('single.get_doc', doc_type=doc_type, doc_id=i['id']) }}">
+                                    <a href="{{ url_for('single.get', doc_type=doc_type, doc_id=i['id']) }}">
                                         {{ i[key] }}
                                     </a>
                                 </td>

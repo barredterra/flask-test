@@ -5,7 +5,7 @@ from flask_test.schema import FORM_SCHEMA
 bp = Blueprint('list', __name__)
 
 @bp.route('/<doc_type>', methods=['GET'])
-def get_list(doc_type):
+def get(doc_type):
     if doc_type == "Report":
         return render_template(
             'report.html',

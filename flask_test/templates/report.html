@@ -31,7 +31,7 @@
 {% else %}
 <div class="text-center">
     <p>Move a <strong>Product</strong> into a <strong>Warehouse</strong> to see it's current stock.</p>
-    <a href="/ProductMovement">
+    <a href="{{ url_for('list.get', doc_type='ProductMovement') }}">
         <button class="btn btn-primary">New ProductMovement</button>
     </a>
 </div>
