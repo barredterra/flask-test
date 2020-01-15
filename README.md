@@ -26,3 +26,50 @@ Run the app:
 ```bash
 flask run --reload
 ```
+
+## Challenges
+
+I spent way too much time figuring out why the selected `<option>` in a new ProductMovement was not submitted by the browser. My form looked like this:
+
+```html
+<form action="{{ url_for('api.create_doc', doc_type=doc_type) }}" method="post" class="form-inline" id="newdoc">
+    {% for field in fields %}
+        {% if field.get('type') == 'select' and field.get('options')%}
+            <select class="form-control custom-select my-1 mr-sm-2">
+                <option value="" disabled selected>{{ field.get('display') }}</option>
+                {% for option in get_options(field.get('options')) %}
+                    <option value="{{ option['id'] }}">{{ option['title'] }}</option>
+                {% endfor %}
+            </select>
+        {% else %}
+            <label for="{{ field.get('name') }}-field" class="sr-only">{{ field.get('display') }}</label>
+            <input 
+                type="{{ field.get('type') }}"
+                name="{{ field.get('name') }}"
+                id="{{ field.get('name') }}-field"
+                placeholder="{{ field.get('display') }}"
+                class="form-control my-1 mr-sm-2"
+            >
+        {% endif %}
+    {% endfor %}
+    <button type="submit" class="btn btn-primary my-1">Create</button>
+</form>
+```
+
+But when I klicked the submit button, the browser didn't send any value to the server. I found the solution by making a simplified version of the problem, without the distracting jinja and bootstrap:
+
+```html
+<select>
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+</select>
+```
+
+The solution was very simple: the `<select>` field needs a name, so the browser can send `my_field=1` to the server.
+
+```html
+<select name="my_field">
+    <option value="1">Option 1</option>
+    <option value="2">Option 2</option>
+</select>
+```
