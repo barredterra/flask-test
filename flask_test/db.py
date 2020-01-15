@@ -78,14 +78,15 @@ class DocType():
 
 
 class Document():
-    def __init__(self, doc_type):
+    def __init__(self, doc_type, doc_id):
         self.doc_type = doc_type
+        self.doc_id = doc_id
         self.db = get_db()
 
-    def get(self, doc_id):
-        results = self.db.execute('SELECT * FROM %s WHERE id = %d' % (self.doc_type, doc_id))
+    def get(self):
+        results = self.db.execute('SELECT * FROM %s WHERE id = ?' % self.doc_type, self.doc_id)
         return results.fetchone()
 
-    def delete(self, doc_id):
-        self.db.execute('DELETE FROM %s WHERE id = %d' % (self.doc_type, doc_id))
+    def delete(self):
+        self.db.execute('DELETE FROM %s WHERE id = ?' % self.doc_type, self.doc_id)
         self.db.commit()
