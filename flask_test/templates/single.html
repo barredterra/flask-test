@@ -9,6 +9,6 @@
 
 {% block content %}
   {% for key in doc.keys() %}
-      <p>{{ key | title }}: {{ doc[key] }}</p>
+      <p><b>{{ " ".join(key.split("_")) | title }}</b>: {{ doc[key] }}</p>
   {% endfor %}
 {% endblock %}

@@ -9,30 +9,29 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a href="/"><span class="navbar-brand">Flask-Test</span></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('list.get', doc_type='Warehouse') }}">Warehouses</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('list.get', doc_type='Product') }}">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('list.get', doc_type='ProductMovement') }}">ProductMovements</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('report.get') }}">Report</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <br>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a href="/"><span class="navbar-brand">Flask-Test</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('list.get', doc_type='Warehouse') }}">Warehouses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('list.get', doc_type='Product') }}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('list.get', doc_type='ProductMovement') }}">ProductMovements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('report.get') }}">Report</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container py-5">
         <section class="content">
             <header>
                 {% block header %}{% endblock %}
