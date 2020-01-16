@@ -4,11 +4,14 @@ This is my try at Frappe's [Flask Test](https://frappe.io/flask-test). I didn't 
 
 The structure of this app is based on the [Flask Tutorial](https://flask.palletsprojects.com/en/1.1.x/tutorial/). I use [bootstrap's CSS](https://getbootstrap.com/docs/4.4/getting-started/introduction/#css) for styling.
 
-![List of Warehouses](img/warehouse.png)
+![](img/warehouse.png)
+The list of warehouses.
 
-![Single ProductMovement](img/product_movement.png)
+![](img/product_movement.png)
+A single product movement.
 
-![Stock balance report](img/report.png)
+![](img/report.png)
+Report of current stock.
 
 ## Setup
 
