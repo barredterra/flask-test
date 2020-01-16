@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<!-- Built on Frappe. https://frappe.io/ -->
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="frappe">
+
+	
+		
+	
+
+	<title> Flask Hiring Test </title>
+
+	
+	<link
+		rel="shortcut icon"
+		href="/assets/frappe_io/images/frappe-logo.png"
+		type="image/x-icon"
+	>
+	<link href="/assets/css/frappe-theme-bs4.css" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="/assets/frappe_theme/css/github.css">
+	<style>
+		
+	</style>
+	
+	
+<script>
+		window.frappe = {};
+		frappe.ready_events = [];
+		frappe.ready = function(fn) {
+			frappe.ready_events.push(fn);
+		}
+		window.dev_server = 0;
+		window.socketio_port = 9000;
+    </script>
+</head>
+<body frappe-session-status="logged-out" data-path="flask-test" frappe-content-type="markdown" >
+
+		
+	
+
+
+<nav class="navbar navbar-expand-lg navbar-light mainnav">
+	<div class="container">
+		<a class="navbar-brand" href="/">
+			
+			<img class="d-inline-block align-top" src="/assets/frappe_io/images/frappe-logo.png">
+			
+			<span>Frappe</span>
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto mt-4 mt-lg-0">
+			</ul>
+			<ul class="navbar-nav ml-auto justify-content-end">
+
+	<li class="nav-item dropdown w-100">
+		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+			data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Products
+		</a>
+		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			
+			<a class="dropdown-item small" href="/erpnext" >
+				ERPNext</a>
+			
+			<a class="dropdown-item small" href="/frappe" >
+				Frappe Framework</a>
+			
+			<a class="dropdown-item small" href="/gantt" >
+				Gantt</a>
+			
+			<a class="dropdown-item small" href="/charts" >
+				Charts</a>
+			
+			<a class="dropdown-item small" href="/datatable" >
+				DataTable</a>
+			
+			<a class="dropdown-item small" href="/frappejs" >
+				FrappeJS</a>
+			
+			<a class="dropdown-item small" href="/accounting" >
+				Accounting</a>
+			
+			<a class="dropdown-item small" href="/marketplace" >
+				Marketplace</a>
+			
+			<a class="dropdown-item small" href="/bench" >
+				Bench</a>
+			
+		</div>
+	<li>
+
+
+				
+
+	<li class="nav-item dropdown w-100">
+		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+			data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			About
+		</a>
+		<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+			
+			<a class="dropdown-item small" href="/about" >
+				Team</a>
+			
+			<a class="dropdown-item small" href="/careers" >
+				Careers</a>
+			
+			<a class="dropdown-item small" href="/inspiration" >
+				Inspiration</a>
+			
+			<a class="dropdown-item small" href="/story" >
+				Story</a>
+			
+			<a class="dropdown-item small" href="/about#contact" >
+				Contact</a>
+			
+		</div>
+	<li>
+
+
+				
+
+	<li class="nav-item ">
+		<a class="nav-link " style="" 
+		href="/blog"
+			 data-navbar-label="Blog">
+			Blog
+		</a>
+	</li>
+
+
+				
+				<!-- post login tools -->
+
+<li class="nav-item dropdown logged-in" id="website-post-login"
+	data-label="website-post-login" style="display: none">
+	<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+		<span class="user-image-wrapper"></span>
+		<span class="full-name"></span>
+		<b class="caret"></b>
+	</a>
+	<div class="dropdown-menu" role="menu"><a class="dropdown-item" href="/me" 
+					rel="nofollow">
+					My Account
+				</a><a class="dropdown-item" href="/?cmd=web_logout" 
+					rel="nofollow">
+					Logout
+				</a><a class="dropdown-item" href="/desk">Switch To Desk</a>
+	</div>
+</li>
+
+
+			</ul>
+		</div>
+</nav>
+	
+	
+
+
+
+
+
+
+
+<div 
+id="page-flask-test" data-path="flask-test"
+>
+	
+<div class="page-content-wrapper">
+	<!-- breadcrumbs -->
+	<div class="page-breadcrumbs">
+		
+		
+		
+	</div>
+
+	
+<main>
+	<div class="d-flex justify-content-between align-items-center">
+		<div class="page-header">
+			
+		</div>
+
+		
+	</div>
+
+	<div class="page_content">
+<div class="from-markdown"><section class='top-section'>
+<h1>Flask Hiring Test</h1>
+</section>
+
+<h3 id="why-this-test">Why this test?</h3>
+
+<p>At Frappe, we build applications for the web, so understanding how web applications work, is a pre-requisite for any new engineer. Flask is one of the simplest and well written Python based web application frameworks and can easily be learned in a few hours.</p>
+
+<p>If you have never worked on web applications before, this test will also help you evaluate whether this is something you are skilled at or can easily learn doing.</p>
+
+<h3 id="inventory-management-web-application">Inventory Management Web Application</h3>
+
+<p>The goal is to create a web application using Flask framework to manage inventory of a list of products in respective warehouses. Imaging this application will be used in a shop or a warehouse that needs to keep track of various products and various locations</p>
+
+<p>The application should cover following functionalities:</p>
+
+<h4 id="database-tables">Database Tables:</h4>
+
+<ul>
+<li>Product (<code>product_id</code>)</li>
+<li>Location (<code>location_id</code>)</li>
+<li>ProductMovement (<code>movement_id</code>, <code>timestamp</code>, <code>from_location</code>, <code>to_location</code>, <code>product_id</code>, <code>qty</code>)</li>
+</ul>
+
+<p>Note: Any one, or both of <code>from_location</code> and <code>to_location</code> can be filled. If you want to move things <em>into</em> a location, <code>from_location</code> will be blank, if you want to move things <em>out</em>, then <code>to_location</code> will be blank.</p>
+
+<h4 id="views">Views:</h4>
+
+<ul>
+<li>Add/Edit/View Product</li>
+<li>Add/Edit/View Location</li>
+<li>Add/Edit/View ProductMovement</li>
+</ul>
+
+<h4 id="report">Report:</h4>
+
+<ul>
+<li>Balance quantity in each location</li>
+</ul>
+
+<h4 id="use-cases">Use Cases:</h4>
+
+<ul>
+<li>Create 3/4 Products</li>
+<li>Create 3/4 Locations</li>
+<li>Make ProductMovements
+<ul>
+<li>Move Product A to Location X</li>
+<li>Move Product B to Location X</li>
+<li>Move Product A from Location X to Location Y</li>
+<li>(make 20 such movements)</li>
+</ul></li>
+<li>Get product balance in each Location in a grid view, with 3 columns: <code>Product</code>, <code>Warehouse</code>, <code>Qty</code></li>
+</ul>
+
+<h3 id="how-to-submit">How to Submit</h3>
+
+<p>Once this application is ready, push your code to <a href="https://github.com">GitHub</a> and add a <code>README.md</code> file in your repository. Add screenshots showing the screens and reports in your README.</p>
+
+<p>After this, just drop in an email to the engineer who requested you for this test or at <a href="mailto:hello@frappe.io">hello@frappe.io</a> saying that your project is done.</p>
+
+<h3 id="next-steps">Next Steps</h3>
+
+<p>After this, we will get in touch with you and you will have to walk us through your code. We will then ask for a few changes or additional features that will help us evaluate how well you know your code base.</p>
+
+<p><strong>A word of caution:</strong> In the past, applicants have not done this test themselves and have completely failed to explain or make changes. We know it sounds dumb, but people do such things.</p>
+
+<p>Feel free to ask for help from anyone or just look on the web. Do this project by yourself if you want to sustain a career in programming and technology!</p>
+
+<p>All the best! 👍</p>
+
+<h3 id="links">Links</h3>
+
+<ul>
+<li><a href="http://flask.pocoo.org/docs/1.0/">http://flask.pocoo.org/docs/1.0/</a></li>
+<li><a href="https://dev.mysql.com/doc/mysql-getting-started/en/">https://dev.mysql.com/doc/mysql-getting-started/en/</a></li>
+<li><a href="https://www.python.org/about/gettingstarted/">https://www.python.org/about/gettingstarted/</a></li>
+<li><a href="https://www.codecademy.com/learn/learn-python">https://www.codecademy.com/learn/learn-python</a></li>
+</ul>
+</div>
+</div>
+
+	<div class="page-footer container"><div class="page-next-prev-links">
+			
+			
+				<a class='text-muted improve-link' target='_blank'
+					href="https://github.com/frappe/frappe_io/blob/master/frappe_io/www/flask-test.md">
+					Improve this page</a>
+			
+		</div></div>
+</main>
+
+</div>
+
+</div>
+
+<footer class="pt-4">
+	<div class="container">
+    <div class="row mt-4 mb-5">
+		<div class='col-sm-12 col-md-6 mb-4' style='display: flex; flex-direction: column; justify-content: space-between;'>
+			<img src="/assets/frappe_io/images/frappe-logo.png"
+				style='height: 50px; width: 50px; margin-bottom: 2em'>
+		    <div class="text-muted">
+		        <div style="line-height: 2">
+		            &copy;<span id="year"></span> Frappe Technologies Pvt. Ltd.
+		            <br>Content licensed under
+		            <a href="https://creativecommons.org/licenses/by-sa/3.0/" class="text-muted underline" target="_blank">
+		            CC-BY-SA 3.0</a>.<br>Read the <a href="https://erpnext.com/terms" class="text-muted underline">terms of use</a>.
+				</div>
+		    </div>
+		</div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+			<h6>Social</h6>
+            <ul class="list-unstyled">
+                <li class="py-2">
+                    <a href="https://frappe.io/blog" class="text-muted">Blog</a>
+                </li>
+                <li class="py-2">
+                    <a href="https://discuss.erpnext.com" class="text-muted">Forum</a>
+                </li>
+                <li class="py-2">
+                    <a href="https://github.com/frappe" class="text-muted">GitHub</a>
+                </li>
+                <li class="py-2">
+                    <a href="https://twitter.com/erpnext" class="text-muted">Twitter</a>
+                </li>
+                <li class="py-2">
+                    <a href="https://medium.com/frapp%C3%A9-thoughts" class="text-muted">Medium</a>
+                </li>
+                <li class="py-2">
+                    <a href="https://www.facebook.com/ERPNext" class="text-muted">Facebook</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-3">
+			<h6>Company</h6>
+            <ul class="list-unstyled">
+                <li class="py-2">
+                    <a href="https://erpnext.com" class="text-muted">ERPNext</a>
+                </li>
+                <li class="py-2">
+                    <a href="https://frappe.io/about" class="text-muted">Team</a>
+                </li>
+                <li class="py-2">
+                    <a href="https://frappe.io/careers" class="text-muted">Careers</a>
+                </li>
+                <li class="py-2">
+                    <a href="https://frappe.io/about#contact" class="text-muted">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+	<div class='mt-4 text-muted text-center'>"Be the change, you wish to see in the world" ~ M. K. Gandhi
+
+	</div>
+</footer>
+<!--Javascript-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.slim.js"></script>
+
+	<!-- js should be loaded in body! -->
+	<script type="text/javascript" src="/assets/frappe/js/lib/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/assets/js/frappe-web.min.js"></script>
+	<script type="text/javascript" src="/assets/js/bootstrap-4-web.min.js"></script>
+	
+<script type="text/javascript" src="/assets/frappe_theme/js/frappe_theme.js"></script>
+
+	<script type="text/javascript" src="/website_script.js"></script>
+	<script type="text/javascript" src="/assets/js/erpnext-web.min.js"></script>
+	<script type="text/javascript" src="/assets/frappe_io/js/docs.js"></script>
+	<script>frappe.csrf_token = "None";</script></body>
+</html>
