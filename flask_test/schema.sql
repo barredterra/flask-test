@@ -48,7 +48,7 @@ outgoing AS (
     GROUP BY product_id, from_warehouse
 )
 SELECT
-    Warehouse.title,
+    Warehouse.title as warehouse,
     Product.title as product,
     SUM(amount) as stock
 FROM (
