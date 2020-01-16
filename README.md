@@ -4,6 +4,12 @@ This is my try at Frappe's [Flask Test](https://frappe.io/flask-test). I didn't 
 
 The structure of this app is based on the [Flask Tutorial](https://flask.palletsprojects.com/en/1.1.x/tutorial/). I use [bootstrap's CSS](https://getbootstrap.com/docs/4.4/getting-started/introduction/#css) for styling.
 
+![List of Warehouses](img/warehouse.png)
+
+![Single ProductMovement](img/product_movement.png)
+
+![Stock balance report](img/report.png)
+
 ## Setup
 
 Create and activate venv, install dependencies:
