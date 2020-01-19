@@ -2,8 +2,6 @@ import sqlite3
 import click
 from flask import current_app, g
 from flask.cli import with_appcontext
-from datetime import datetime
-from flask_test.schema import FORM_SCHEMA
 
 def get_db():
     """Return a database connection."""
