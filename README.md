@@ -84,3 +84,9 @@ The solution was very simple: the `<select>` field needs a name, so the browser 
     <option value="2">Option 2</option>
 </select>
 ```
+
+## To do
+
+- [ ] Avoid SQL injection.
+- [ ] Move DocType definition into one place.
+- [ ] Filter lists and reports.
